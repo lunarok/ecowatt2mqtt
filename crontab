@@ -1,1 +1,1 @@
-00 * * * * /usr/scheduler/salat.sh
+10 * * * * /app/salat.sh
