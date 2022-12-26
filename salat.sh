@@ -25,5 +25,6 @@ else
 fi
 
 array=( (ipraytime --latitude $latitude --longitude $longitude -a 1 --fajrangle 12 --ishaangle 12) )
-json='{"imsak":"'array[56]'","fajr":"'array[47]'","shurooq":"'array[48]'","dhuhr":"'array[49]'","asr":"'array[50]'","maghrib":"'array[51]'","isha":"'array[52]'","imsak_tomorro":"'array[60]'","fajr_tomorrow":"'array[64]'"}'
-mosquitto_pub -h $MQTT_HOST -t $mqtt_topic -m $json
+json='{"imsak":"'`date --date ${array[56]}`'","fajr":"'`date --date ${array[47]}`'","shurooq":"'`date --date ${array[48]}`'","dhuhr":"'`date --date ${array[49]}`'","asr":"'`date --date ${array[50]}`'","maghrib":"'`date --date ${array[51]}`'","isha":"'`date --date ${array[52]}`'","imsak_tomorro":"'`date --date ${array[60]}`'","fajr_tomorrow":"'`date --date ${array[64]}`'"}'
+
+mosquitto_pub -r -h $mqtt_host -t $mqtt_topic -m $json
