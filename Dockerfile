@@ -4,7 +4,7 @@ WORKDIR /usr/scheduler
 COPY crontab .
 COPY start.sh .
 COPY salat.sh .
-RUN chmod 0744 salat.sh
+RUN chmod 0744 *.sh
 
 #Install Cron
 RUN apt-get update
