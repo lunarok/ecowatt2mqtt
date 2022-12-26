@@ -5,8 +5,8 @@ COPY salat.sh .
 RUN chmod 0744 *.sh
 
 COPY crontab /etc/cron.d/crontab
-RUN chmod 0644 /etc/cron.d/crontab &&
-    crontab /etc/cron.d/crontab
+RUN chmod 0644 /etc/cron.d/crontab
+RUN crontab /etc/cron.d/crontab
 
 #Install Cron
 RUN apt-get update
