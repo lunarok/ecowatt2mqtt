@@ -8,7 +8,7 @@ longitude="${LONGITUDE:--0,64}"
 echo "Using : "${mqtt_host}" "${mqtt_topic}" "${latitude}" "${longitude}
 
 array=( $(ipraytime --latitude ${latitude} --longitude ${longitude} -a 1 --fajrangle 12 --ishaangle 12) )
-json='{"imsak":"'`date --date ${array[56]}`'","fajr":"'`date --date ${array[47]}`'","shurooq":"'`date --date ${array[48]}`'","dhuhr":"'`date --date ${array[49]}`'","asr":"'`date --date ${array[50]}`'","maghrib":"'`date --date ${array[51]}`'","isha":"'`date --date ${array[52]}`'","imsak_tomorrow":"'`date --date ${array[60]}`'","fajr_tomorrow":"'`date --date ${array[64]}`'"}'
+json='{"imsak":"'`date --iso-8601 --date ${array[56]}`'","fajr":"'`date --iso-8601 --date ${array[47]}`'","shurooq":"'`date --iso-8601 --date ${array[48]}`'","dhuhr":"'`date --iso-8601 --date ${array[49]}`'","asr":"'`date --iso-8601 --date ${array[50]}`'","maghrib":"'`date --iso-8601 --date ${array[51]}`'","isha":"'`date --iso-8601 --date ${array[52]}`'","imsak_tomorrow":"'`date --iso-8601 --date ${array[60]}`'","fajr_tomorrow":"'`date --iso-8601 --date ${array[64]}`'"}'
 
 mosquitto_pub -r -h $mqtt_host -t homeassistant/sensor/salat/imsak/config -m '{"name": "Imsak", "device_class": "date", "state_topic": "'${mqtt_topic}'", "value_template": "{{ value_json.imsak}}", "unique_id": "salat.imsak"}'
 mosquitto_pub -r -h $mqtt_host -t homeassistant/sensor/salat/fajr/config -m '{"name": "Fajr", "device_class": "date", "state_topic": "'${mqtt_topic}'", "value_template": "{{ value_json.fajr}}", "unique_id": "salat.fajr"}'
