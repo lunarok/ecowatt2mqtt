@@ -1,1 +1,1 @@
-10 * * * * /app/salat.sh
+10 * * * * bash /app/salat.sh
