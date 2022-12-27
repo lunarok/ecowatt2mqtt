@@ -5,6 +5,8 @@ mqtt_topic="${MQTT_TOPIC:-salat/time}"
 latitude="${LATITUDE:-47,47}"
 longitude="${LONGITUDE:--0,64}"
 
+echo "Using : "${mqtt_host}" "${mqtt_topic}" "${latitude}" "${longitude}
+
 array=( $(ipraytime --latitude ${latitude} --longitude ${longitude} -a 1 --fajrangle 12 --ishaangle 12) )
 json='{"imsak":"'`date --date ${array[56]}`'","fajr":"'`date --date ${array[47]}`'","shurooq":"'`date --date ${array[48]}`'","dhuhr":"'`date --date ${array[49]}`'","asr":"'`date --date ${array[50]}`'","maghrib":"'`date --date ${array[51]}`'","isha":"'`date --date ${array[52]}`'","imsak_tomorrow":"'`date --date ${array[60]}`'","fajr_tomorrow":"'`date --date ${array[64]}`'"}'
 
@@ -17,5 +19,7 @@ mosquitto_pub -r -h $mqtt_host -t homeassistant/sensor/salat/maghrib/config -m '
 mosquitto_pub -r -h $mqtt_host -t homeassistant/sensor/salat/isha/config -m '{"name": "Isha", "device_class": "date", "state_topic": "'${mqtt_topic}'", "value_template": "{{ value_json.isha}}", "unique_id": "salat.isha"}'
 mosquitto_pub -r -h $mqtt_host -t homeassistant/sensor/salat/imsak_tomorrow/config -m '{"name": "Imsak Tomorrow", "device_class": "date", "state_topic": "'${mqtt_topic}'", "value_template": "{{ value_json.imsak_tomorrow}}", "unique_id": "salat.imsak_tomorrow"}'
 mosquitto_pub -r -h $mqtt_host -t homeassistant/sensor/salat/fajr_tomorrow/config -m '{"name": "Fajr Tomorrow", "device_class": "date", "state_topic": "'${mqtt_topic}'", "value_template": "{{ value_json.fajr_tomorrow}}", "unique_id": "salat.fajr_tomorrow"}'
+
+echo $json
 
 mosquitto_pub -r -h $mqtt_host -t $mqtt_topic -m $json
