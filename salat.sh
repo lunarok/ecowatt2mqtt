@@ -22,4 +22,4 @@ mosquitto_pub -r -h $mqtt_host -t homeassistant/sensor/salat/fajr_tomorrow/confi
 
 echo $json
 
-mosquitto_pub -r -h $mqtt_host -t $mqtt_topic -m $json
+mosquitto_pub -r -h $mqtt_host -t $mqtt_topic -m "${json}"
