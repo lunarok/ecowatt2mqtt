@@ -1,15 +1,10 @@
 FROM debian:bullseye
 
-WORKDIR /app
-COPY salat.sh .
-RUN chmod 0744 *.sh
 
+RUN apt-get update && apt-get -y install bash mosquitto-clients wget jq cron itools
+
+COPY salat.sh /
 COPY crontab /etc/cron.d/crontab
-RUN chmod 0644 /etc/cron.d/crontab
-RUN crontab /etc/cron.d/crontab
-
-#Install Cron
-RUN apt-get update
-RUN apt-get -y install bash mosquitto-clients jq cron itools
+RUN chmod 0755 /salat.sh && crontab /etc/cron.d/crontab
 
 ENTRYPOINT ["cron", "-f"]
