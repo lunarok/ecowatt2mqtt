@@ -1,20 +1,11 @@
-# salat2mqtt
+# beem2mqtt
 
-Calculate prayer times per day, following times are avalaible :
-Imsak
-Fajr
-Shurooq
-Dhuhr
-Asr
-Madghrib
-Isha
-Imsak for tomorrow
-Fajr for tomorrow
+Pull production informations from Beem
 
 Publish it on MQTT
 
 Environment variables to use :
 MQTT_HOST (default 192.168.0.100)
-MQTT_TOPIC (default salat/time)
-LATITUDE
-LONGITUDE
+MQTT_TOPIC (default beem/status)
+LOGIN
+PASSWORD
