@@ -17,4 +17,4 @@ mosquitto_pub -r -h $mqtt_host -t homeassistant/sensor/beem/totalMonth/config -m
 mosquitto_pub -r -h $mqtt_host -t homeassistant/sensor/beem/wattHour/config -m '{"name": "wattHour", "device_class": "energy", "unit_of_measurement": "Wh", state_topic": "general/beem", "value_template": "{{ value_json.wattHour}}", "unique_id": "mqtt.beem.wattHour", "device": {"model": "Beem", "identifiers": ["mqtt-beem"], "name": "Beem", "manufacturer": "Beem"}}'
 mosquitto_pub -r -h $mqtt_host -t homeassistant/sensor/beem/totalDay/config -m '{"name": "totalDay", "device_class": "energy", "unit_of_measurement": "Wh", state_topic": "general/beem", "value_template": "{{ value_json.totalDay}}", "unique_id": "mqtt.beem.totalDay", "device": {"model": "Beem", "identifiers": ["mqtt-beem"], "name": "Beem", "manufacturer": "Beem"}}'
 
-mosquitto_pub -r -h $mqtt_host -t $mqtt_topic -m '$result'
+mosquitto_pub -r -h $mqtt_host -t $mqtt_topic -m '${result}'
