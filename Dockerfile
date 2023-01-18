@@ -1,7 +1,7 @@
 FROM debian:bullseye
 
 
-RUN apt-get update && apt-get -y install bash mosquitto-clients wget jq cron
+RUN apt-get update && apt-get -y install bash mosquitto-clients curl wget jq cron
 
 ADD beem.sh /
 ADD entrypoint.sh /
