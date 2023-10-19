@@ -2,12 +2,12 @@
 mqtt_host="${MQTT_HOST:-192.168.0.100}"
 mqtt_topic="${MQTT_TOPIC:-beem/status}"
 
-token=`curl https://api-x.beem.energy/beemapp/user/login -X POST -H "Content-Type: application/json" --data-raw "{\"email\":\"${LOGIN}\",\"password\":\"${PASSWORD}\"}" | jq .accessToken`
+token=`curl https://api-x.beem.energy/beemapp/user/login -X POST -H "Content-Type: application/json" --data-raw "{\"email\":\"${LOGIN}\",\"password\":\"${PASSWORD}\"}" | jq .accessToken | tr -d \"`
 
 year=$(date +%Y) 
 month=$(date +%m)
 data='{"month":'${month//0}',"year":'${year}'}'
-auth='authorization: Bearer '"${token//\"}"
+auth='authorization: Bearer '"${token}"
 
 result=`curl https://api-x.beem.energy/beemapp/box/summary -X POST -H "Content-Type: application/json" -H "${auth}" --data-raw "${data}" | tr -d []`
 
