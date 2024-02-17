@@ -1,2 +1,2 @@
-0 * * * * root bash /angers.sh
-@reboot root bash /angers.sh
+0 * * * * root bash /script.sh
+@reboot root bash /script.sh
