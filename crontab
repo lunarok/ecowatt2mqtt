@@ -1,2 +1,2 @@
-0 * * * * root bash /beem.sh
-@reboot root bash /beem.sh
+0 * * * * root bash /angers.sh
+@reboot root bash /angers.sh
